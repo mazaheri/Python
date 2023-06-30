@@ -36,10 +36,9 @@ def start_crawl_city(url):
 
     return adv_links
 
-
 def start_crawl():
-    cities = ['paris', 'berlin', 'amsterdam', 'munich']
-    link = 'https://{}.craigslist.org/search/hhh?availabilityMode=0&lang=en&cc=gb&s='
+    cities = ['berlin','paris']
+    link = 'https://{}.craigslist.org/search/sss?s='
     for city in cities:
         links = start_crawl_city(link.format(city))
         print(f'{city} total: {len(links)}')
@@ -49,9 +48,9 @@ def get_pages_data():
     raise NotImplementedError()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     switch = sys.argv[1]
-    if switch == 'find_links':
+    if switch == 'find_links':c
         start_crawl()
     elif switch == 'extract_pages':
         get_pages_data()
