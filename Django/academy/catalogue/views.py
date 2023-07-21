@@ -1,16 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from catalogue.models import Product, category
+# from catalogue.models import Product,
 
 
-# Create your views here.
-def product_list(request):
-    products = Product.objects.all()
-    context = '<br>'.join([f"{product.title},{product.upc}" for product in products])
-    return HttpResponse(context)
-
-    products = Product.objects.select_related('category').all()
-
+# # Create your views here.
+# def product_list(request):
+#     products = Product.objects.all()
+#     context = '<br>'.join([f"{product.title},{product.upc}" for product in products])
+#     return HttpResponse(context)
+#
+# #    products = Product.objects.select_related('category').all()
+#
 
 
 

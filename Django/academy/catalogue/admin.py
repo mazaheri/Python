@@ -1,6 +1,7 @@
 from django.contrib import admin
 from catalogue.models import Category, Brand, Product, ProductType, ProductAttribute
 
+
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['upc', 'title', 'is_active', 'product_type', 'category', 'brand']
@@ -10,6 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def active_all(self, request, queryset):
         pass
+
 
 class ProductAttributesAdmin(admin.ModelAdmin):
     list_display = ['title', 'product_type', 'attribute_type']
