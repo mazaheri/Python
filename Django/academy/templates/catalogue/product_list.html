@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+Product List Page
+{% endblock %}
 
-</body>
-</html>
+
+{% block content %}
+    <H1> Hello {{request.user.username}} </H1>
+    {% for product in products %}
+        <a href="#">
+            {{product.title}} ({% if product.is_active  %} Product is available
+            {% else %} Not available {% endif %})
+        </a>
+        {% if product.stock %}
+            <p>$ - {{ product.stock.price }}</p>
+        {% endif %}
+    <br>
+    {% endfor %}
+
+{% endblock %}

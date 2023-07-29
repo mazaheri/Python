@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load category_tags %}
 
-</body>
-</html>
+{% get_category as categories %}
+
+{% for category in categories %}
+   <a href="{{ category.get_absolute_url }}" target="_blank" class="nav-bar-items"> <p>{{category}}</p></a>
+{% endfor %}

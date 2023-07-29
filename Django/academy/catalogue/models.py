@@ -2,7 +2,14 @@ from django.db import models
 
 
 # Create your models here
-# choose Product Type to choose Product Attribute
+# choose Product Type to choose Produ  ct Attribute
+
+
+class my_manager(models.Manager):
+    def is_active(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(is_active=True)
+
+
 class ProductType(models.Model):
     title = models.CharField(max_length=32, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
@@ -46,8 +53,14 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
+
     def __str__(self):
         return self.name
+
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('user-profile')
 
 
 # each product may have own Brand
@@ -69,8 +82,25 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products_brands')
     is_active = models.BooleanField(default=True)
 
+
+
+    default_manager = models.Manager()
+    objects = my_manager()
+
     def __str__(self):
         return self.title
+
+    @property
+    def stock(self):
+        return self.partners.all().order_by('price').first()
+
+
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to='products/')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+
+    def __str__(self):
+        return str(self.product)
 
 
 # the value of each product attribute

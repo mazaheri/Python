@@ -1,16 +1,9 @@
 from django.contrib import admin
-from catalogue.models import Category, Brand, Product, ProductType, ProductAttribute
+from catalogue.models import Category, Brand, Product, ProductType, ProductAttribute, ProductImage
 
 
-# Register your models here.
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['upc', 'title', 'is_active', 'product_type', 'category', 'brand']
-    list_filter = ['is_active']
-    search_fields = ['upc', 'title', 'category__name','brand__name']
-    actions = ['active_all']
-
-    def active_all(self, request, queryset):
-        pass
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
 
 
 class ProductAttributesAdmin(admin.ModelAdmin):
@@ -25,6 +18,18 @@ class ProductAttributeInline(admin.TabularInline):
 class ProductTypeAdmin(admin.ModelAdmin):
     list_display = ['title', 'description']
     inlines = [ProductAttributeInline]
+
+# Register your models here.
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['upc', 'title', 'is_active', 'product_type', 'category', 'brand']
+    list_filter = ['is_active']
+    search_fields = ['upc', 'title', 'category__name','brand__name']
+    actions = ['active_all']
+    inlines = [ProductImageInline]
+
+    def active_all(self, request, queryset):
+        pass
+
 
 
 admin.site.register(Category)
