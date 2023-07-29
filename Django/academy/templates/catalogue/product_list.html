@@ -15,6 +15,7 @@ Product List Page
             <p>$ - {{ product.stock.price }}</p>
         {% endif %}
     <br>
+    <img src="{{ product.images.all.0.image.url }}" ><br>
     {% endfor %}
 
 {% endblock %}
